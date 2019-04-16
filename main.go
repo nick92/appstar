@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/lib/pq"
@@ -268,8 +269,7 @@ func getPing(c *gin.Context) {
 }
 
 func main() {
-	//port := os.Getenv("PORT")
-	port := "8000"
+	port := os.Getenv("PORT")
 
 	if port == "" {
 		log.Fatal("$PORT must be set")
@@ -279,8 +279,7 @@ func main() {
 
 	json.Unmarshal([]byte(recommendedJson), &result)*/
 
-	connStr := "postgres://udeaktwoljgkjh:187a6bdd36f9b5dd51574e810d8c5d86334f76354ba1d908dcf7473bd97a3e62@ec2-54-75-238-138.eu-west-1.compute.amazonaws.com:5432/d382121ts6jeol"
-	db, err = sql.Open("postgres", connStr)
+	db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatal(err)
 	}
