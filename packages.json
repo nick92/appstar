@@ -1,0 +1,47 @@
+{
+    "usefull": [
+        "geary",
+        "libreoffice-writer",
+        "libreoffice-impress",
+        "vlc",
+        "gimp",
+        "shotwell",
+        "*brave",
+        "*spotify",
+        "*skype",
+        "calibre-gui"
+    ],
+    "office": [
+        "*telegram-desktop",
+        "shotwell",
+        "*slack",
+        "org.gnome.Todo",
+        "darktable",
+        "org.gnome.Calendar",
+        "org.gnome.Calculator",
+        "*okular",
+        "*krita"
+    ],
+    "dev": [
+        "geany",
+        "bluefish",
+        "*vscode",
+        "*android-studio",
+        "*sublime-text",
+        "*postman",
+        "devhelp",
+        "mousepad",
+        "*atom"
+    ],
+    "multimedia": [
+        "vlc",
+        "audacity",
+        "rhythmbox",
+        "picard",
+        "parole",
+        "*spotify",
+        "*winds",
+        "*obs-studio",
+        "*musescore"
+    ]
+}
