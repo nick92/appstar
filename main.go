@@ -63,7 +63,7 @@ func getUsefulApps(c *gin.Context) {
 
 		if err := rows.Scan(&id, &appname, &catregory); err != nil {
 			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error scanning ticks: %q", err))
+				fmt.Sprintf("Error scanning rows: %q", err))
 			return
 		}
 		applications = append(applications, Apps{ID: id, Appname: appname, Category: catregory})
@@ -92,7 +92,7 @@ func getOfficeApps(c *gin.Context) {
 
 		if err := rows.Scan(&id, &appname, &catregory); err != nil {
 			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error scanning ticks: %q", err))
+				fmt.Sprintf("Error scanning rows: %q", err))
 			return
 		}
 		applications = append(applications, Apps{ID: id, Appname: appname, Category: catregory})
@@ -121,7 +121,7 @@ func getDevelopmentApps(c *gin.Context) {
 
 		if err := rows.Scan(&id, &appname, &catregory); err != nil {
 			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error scanning ticks: %q", err))
+				fmt.Sprintf("Error scanning rows: %q", err))
 			return
 		}
 		applications = append(applications, Apps{ID: id, Appname: appname, Category: catregory})
