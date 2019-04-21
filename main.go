@@ -44,7 +44,6 @@ var appsTable string
 var actionTable string
 
 func getUsefulApps(c *gin.Context) {
-	//c.JSON(200, applications)
 	applications = nil
 
 	rows, err := db.Query(fmt.Sprintf(`select * from %s where category='%s'`, appsTable, "useful"))
