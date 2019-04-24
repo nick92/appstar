@@ -44,7 +44,6 @@ var appsTable string
 var actionTable string
 
 func getUsefulApps(c *gin.Context) {
-	//c.JSON(200, applications)
 	applications = nil
 
 	rows, err := db.Query(fmt.Sprintf(`select * from %s where category='%s'`, appsTable, "useful"))
@@ -63,7 +62,7 @@ func getUsefulApps(c *gin.Context) {
 
 		if err := rows.Scan(&id, &appname, &catregory); err != nil {
 			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error scanning ticks: %q", err))
+				fmt.Sprintf("Error scanning rows: %q", err))
 			return
 		}
 		applications = append(applications, Apps{ID: id, Appname: appname, Category: catregory})
@@ -92,7 +91,7 @@ func getOfficeApps(c *gin.Context) {
 
 		if err := rows.Scan(&id, &appname, &catregory); err != nil {
 			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error scanning ticks: %q", err))
+				fmt.Sprintf("Error scanning rows: %q", err))
 			return
 		}
 		applications = append(applications, Apps{ID: id, Appname: appname, Category: catregory})
@@ -121,7 +120,7 @@ func getDevelopmentApps(c *gin.Context) {
 
 		if err := rows.Scan(&id, &appname, &catregory); err != nil {
 			c.String(http.StatusInternalServerError,
-				fmt.Sprintf("Error scanning ticks: %q", err))
+				fmt.Sprintf("Error scanning rows: %q", err))
 			return
 		}
 		applications = append(applications, Apps{ID: id, Appname: appname, Category: catregory})
