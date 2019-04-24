@@ -191,7 +191,7 @@ func getGameApps(c *gin.Context) {
 }
 
 func starApplication(c *gin.Context) {
-	name := c.PostForm("name")
+	name := c.Query("name")
 	counter := 0
 
 	rows, err := db.Query(fmt.Sprintf(`select * from %s where appname='%s'`, starsTable, name))
