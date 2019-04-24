@@ -274,9 +274,7 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 	/*recommendedJson := `{"applications":{"name":"firefox","description":"for browsing web stuffs", "type": "browser", "rating": 100}}`
-	var result map[string]interface{}
-
-	json.Unmarshal([]byte(recommendedJson), &result)*/
+	var result map[string]interface{}*/
 
 	db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
