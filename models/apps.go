@@ -3,7 +3,6 @@ package models
 import (
 	"database/sql"
 	"fmt"
-	"time"
 
 	"github.com/lib/pq"
 	"github.com/nick92/appstar/common"
@@ -16,6 +15,11 @@ type Apps struct {
 	ID       int
 	Appname  string
 	Category string
+}
+
+type AppRequest struct {
+	AppName  string `json:"app_name"`
+	Category string `json:"category"`
 }
 
 // Actions table structure
@@ -41,7 +45,7 @@ func GetAllAppsForCategory(category string) (*sql.Rows, error) {
 
 func InsertAppForCategory(appName string, category string) error {
 	db := common.GetDB()
-	_, err := db.Exec(fmt.Sprintf(`insert into %s values('%s', %s, %s)`, appsTable, appName, category, time.Now()))
+	_, err := db.Exec(fmt.Sprintf(`insert into %s (appname, category) values('%s', '%s')`, appsTable, appName, category))
 
 	if err != nil {
 		return err

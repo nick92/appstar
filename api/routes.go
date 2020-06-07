@@ -22,7 +22,10 @@ func Routes(router *gin.RouterGroup) {
 	router.GET("/multimedia", getMulitmediaApps)
 	router.GET("/games", getGameApps)
 
+	router.POST("/add_app", addApplication)
 	router.POST("/appstar", starApplication)
+
+	router.DELETE("/delete_app", deleteApplication)
 }
 
 func getPing(c *gin.Context) {
@@ -226,6 +229,26 @@ func getApps(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": applications})
 }
 
+func addApplication(c *gin.Context) {
+	var appRequest models.AppRequest
+
+	if err := c.BindJSON(&appRequest); err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	err := models.InsertAppForCategory(appRequest.AppName, appRequest.Category)
+
+	if err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "app saved!"})
+}
+
 func starApplication(c *gin.Context) {
 	name := c.Query("name")
 
@@ -271,4 +294,18 @@ func getAllStars(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"result": starResponse})
+}
+
+func deleteApplication(c *gin.Context) {
+	name := c.Query("name")
+
+	err := models.DeleteApp(name)
+
+	if err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"result": "app deleted!"})
 }
