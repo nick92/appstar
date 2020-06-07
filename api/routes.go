@@ -14,11 +14,159 @@ func Routes(router *gin.RouterGroup) {
 	router.GET("/get_packages", getApps)
 	router.GET("/get_popular_packages", getPopularApps)
 	router.GET("/get_all_stars", getAllStars)
+
+	// legacy support for old routes
+	router.GET("/useful", getUsefulApps)
+	router.GET("/office", getOfficeApps)
+	router.GET("/development", getDevelopmentApps)
+	router.GET("/multimedia", getMulitmediaApps)
+	router.GET("/games", getGameApps)
+
 	router.POST("/appstar", starApplication)
 }
 
 func getPing(c *gin.Context) {
 	c.JSON(200, gin.H{"message": "pong"})
+}
+
+func getUsefulApps(c *gin.Context) {
+	var applications []models.Apps
+
+	rows, err := models.GetAllAppsForCategory("useful")
+
+	if err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var id int
+		var appname string
+		var catregory string
+
+		if err := rows.Scan(&id, &appname, &catregory); err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error scanning rows: %q", err))
+			return
+		}
+		applications = append(applications, models.Apps{ID: id, Appname: appname, Category: catregory})
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": applications})
+}
+
+func getOfficeApps(c *gin.Context) {
+	var applications []models.Apps
+
+	rows, err := models.GetAllAppsForCategory("office")
+
+	if err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var id int
+		var appname string
+		var catregory string
+
+		if err := rows.Scan(&id, &appname, &catregory); err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error scanning rows: %q", err))
+			return
+		}
+		applications = append(applications, models.Apps{ID: id, Appname: appname, Category: catregory})
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": applications})
+}
+
+func getDevelopmentApps(c *gin.Context) {
+	var applications []models.Apps
+
+	rows, err := models.GetAllAppsForCategory("development")
+
+	if err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var id int
+		var appname string
+		var catregory string
+
+		if err := rows.Scan(&id, &appname, &catregory); err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error scanning rows: %q", err))
+			return
+		}
+		applications = append(applications, models.Apps{ID: id, Appname: appname, Category: catregory})
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": applications})
+}
+
+func getMulitmediaApps(c *gin.Context) {
+	var applications []models.Apps
+
+	rows, err := models.GetAllAppsForCategory("multimedia")
+
+	if err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var id int
+		var appname string
+		var catregory string
+
+		if err := rows.Scan(&id, &appname, &catregory); err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error scanning rows: %q", err))
+			return
+		}
+		applications = append(applications, models.Apps{ID: id, Appname: appname, Category: catregory})
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": applications})
+}
+
+func getGameApps(c *gin.Context) {
+	var applications []models.Apps
+
+	rows, err := models.GetAllAppsForCategory("games")
+
+	if err != nil {
+		c.String(http.StatusInternalServerError,
+			fmt.Sprintf("Error: %q", err))
+		return
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var id int
+		var appname string
+		var catregory string
+
+		if err := rows.Scan(&id, &appname, &catregory); err != nil {
+			c.String(http.StatusInternalServerError,
+				fmt.Sprintf("Error scanning rows: %q", err))
+			return
+		}
+		applications = append(applications, models.Apps{ID: id, Appname: appname, Category: catregory})
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": applications})
 }
 
 func getPopularApps(c *gin.Context) {

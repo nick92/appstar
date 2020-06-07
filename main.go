@@ -20,7 +20,7 @@ func main() {
 	defer db.Close()
 
 	r := gin.Default()
-	rapi := r.Group("api")
+	rapi := r.Group("packages")
 	api.Routes(rapi)
 
 	r.Run(":" + port) // listen and serve on 0.0.0.0:port
